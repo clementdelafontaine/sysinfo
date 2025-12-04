@@ -1,0 +1,41 @@
+name: python-build
+on: workflow_dispatch
+jobs:
+  python-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installation des dépendances
+        run: pip install ifaddr psutil pylint
+      - name: Analyse du code python
+        run: pylint --disable=missing-docstring script/mysystem/mysystem.py
+  python-test:
+    runs-on: ubuntu-latest
+    needs: python-lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installation des dépendances
+        run: pip install ifaddr psutil
+      - name: Exécution du test
+        run: python script/mysystem/mysystem.py
+  c-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyse du code c
+        run: make lint
+  c-build:
+    runs-on: ubuntu-latest
+    needs: c-lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: code compilation
+        run: |
+          mkdir -p bin
+          make build
