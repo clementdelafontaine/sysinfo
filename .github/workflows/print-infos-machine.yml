@@ -1,12 +1,12 @@
 name: print-infos-machine
-on: push
+on: workflow_dispatch
 jobs:
-  check-bats-version:
+  print-infos-machine:
     runs-on: ubuntu-latest
     steps:
       - name: informations sur la machine
         run: hostnamectl
       - name: adressage ipv4
-        run: ip a -4
+        run: ip -4 a
       - name: mon identité de connexion
         run: whoami
