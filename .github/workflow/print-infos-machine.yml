@@ -1,0 +1,12 @@
+name: print-infos-machine
+on: push
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: informations sur la machine
+        run: hostnamectl
+      - name: adressage ipv4
+        run: ip a -4
+      - name: mon identité de connexion
+        run: whoami
