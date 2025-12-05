@@ -60,7 +60,7 @@ jobs:
       - name: Upload binary as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sysinfo-binary-${{ github.sha }}
+          name: sysinfo-binary-latest
           path: bin/sysinfo
   c-run-sysinfo:
     permissions:
@@ -74,7 +74,7 @@ jobs:
       - name: sysinfo download artifact
         uses: actions/download-artifact@v4
         with:
-          name: sysinfo-binary-${{ github.sha }}
+          name: sysinfo-binary-latest
       - name: run sysinfo
         run: |
           chmod +x sysinfo
