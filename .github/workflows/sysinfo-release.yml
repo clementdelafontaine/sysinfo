@@ -21,4 +21,5 @@ jobs:
       - name: release sysinfo
         uses: softprops/action-gh-release@v2
         with:
+          draft: false
           files: sysinfo-binary-latest
