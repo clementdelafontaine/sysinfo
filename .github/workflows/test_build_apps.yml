@@ -1,5 +1,11 @@
 name: apps-build
 on: workflow_dispatch
+
+permissions:
+  id-token: write # requis pour signer
+  contents: read
+  attestations: write # requis pour créer l'attestation
+
 jobs:
   python-lint:
     if: false
@@ -37,10 +43,14 @@ jobs:
     needs: c-lint
     steps:
       - uses: actions/checkout@v4
-      - name: code compilation
+      - name: build artifact
         run: |
           mkdir -p bin
           make build
+      - name: Generate attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'bin/sysinfo'
       - name: Upload binary as artifact
         uses: actions/upload-artifact@v4
         with:
