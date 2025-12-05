@@ -1,16 +1,15 @@
 name: 02 - Variables and Context
-
 on: push
-  env:
-    GLOBAL_VAR: "Je suis globale"
+env:
+  GLOBAL_VAR: "Je suis globale"
 
 jobs:
   variables:
     runs-on: ubuntu-latest
     env:
       JOB_VAR: "Je suis au niveau job"
- 
-   steps:
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -23,18 +22,18 @@ jobs:
           echo "Step: $STEP_VAR"
 
       - name: Show GitHub context
-          run: |
-            echo "Repository: ${{ github.repository }}"
-            echo "Branch: ${{ github.ref_name }}"
-            echo "SHA: ${{ github.sha }}"
-            echo "Actor: ${{ github.actor }}"
-            echo "Event: ${{ github.event_name }}"
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
 
       - name: Show runner context
-          run: |
-            echo "OS: ${{ runner.os }}"
-            echo "Architecture: ${{ runner.arch }}"
+        run: |
+          echo "OS: ${{ runner.os }}"
+          echo "Architecture: ${{ runner.arch }}"
 
       - name: Show preject secret
-          run: |
-            echo "secret: ${{ SYS_INFO.FIRST_SECRET }}"
+        run: |
+          echo "secret: ${{ secrets.FIRST_SECRET }}"
