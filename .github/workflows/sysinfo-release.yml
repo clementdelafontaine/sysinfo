@@ -17,8 +17,8 @@ jobs:
       - name: sysinfo download artifact
         uses: actions/download-artifact@v4
         with:
-          name: sysinfo-binary-${{ github.sha }}
+          name: sysinfo-binary-latest
       - name: release sysinfo
         uses: softprops/action-gh-release@v2
         with:
-          files: sysinfo-binary-${{ github.sha }}
+          files: sysinfo-binary-latest
