@@ -1,4 +1,4 @@
-name: 02 - Variables and Context
+name: variables-et-contexte
 on: push
 env:
   GLOBAL_VAR: "Je suis globale"
